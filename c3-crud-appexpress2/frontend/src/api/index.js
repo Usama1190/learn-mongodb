@@ -9,11 +9,11 @@ const apiClient = axios.create({
 })
 
 
-apiClient.interceptors.response((res) => {
-    return res
-}, (error) => {
-    return error;
-})
+// apiClient.interceptors.response((res) => {
+//     return res
+// }, (error) => {
+//     return error;
+// })
 
 
 export default apiClient;
