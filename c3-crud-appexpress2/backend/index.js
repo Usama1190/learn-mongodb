@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { taskRoutes } from './routes/taskRoutes.js';
 import { enums } from './constant/enum.js';
 import mongoose from 'mongoose';
+import cors from "cors"; // Remove this
 
 /*
 
@@ -14,6 +15,8 @@ password: hxwqKnbEW8n5M22x
 
 const app = express();
 dotenv.config();
+
+app.use(cors());
 
 app.use(express.json());
 

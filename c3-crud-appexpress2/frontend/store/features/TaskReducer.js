@@ -8,7 +8,7 @@ const TaskReducer = createSlice({
     name: "tasks",
     initialState,
     reducers: {
-        getAllTasks: (state, {payload}) => {
+        getAllTask: (state, {payload}) => {
             state.task = payload
         },
         addTask: (state, {payload}) => {
@@ -20,5 +20,5 @@ const TaskReducer = createSlice({
     }
 })
 
-export const  {addTask, deleteTask, getAllTasks} = TaskReducer.reducer;
+export const  {addTask, deleteTask, getAllTask} = TaskReducer.actions;
 export default TaskReducer.reducer;

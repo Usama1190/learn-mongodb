@@ -5,6 +5,22 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
+  {
+    env: {
+      node: true, // Enable Node.js global variables and features
+      es2021: true, // Enable ES2021 syntax
+    },
+    extends: [
+      'eslint:recommended', // Use the recommended ESLint rules
+    ],
+    parserOptions: {
+      ecmaVersion: 'latest', // Use the latest ECMAScript version
+      sourceType: 'module', // Enable ECMAScript modules (import/export)
+    },
+    rules: {
+      'no-undef': 'error', // Ensure no undefined variables are used
+    },
+  },
   { ignores: ['dist'] },
   {
     files: ['**/*.{js,jsx}'],
