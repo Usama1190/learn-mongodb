@@ -17,7 +17,7 @@ const getReq = async (path) => {
 
 const postReq = async (path, data) => {
     try {
-        const response = await apiClient.get(path)
+        const response = await apiClient.post(path)
         return response
     } catch (error) {
         console.log(error);

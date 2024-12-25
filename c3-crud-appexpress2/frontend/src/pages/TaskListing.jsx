@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { getReq } from "../api/axios";
 // import cors from "cors"; // Remove this
-import { useDispatch, useSelector } from 'react-redux';
-import { addTask, getAllTask } from '../../store/features/TaskReducer';
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, getAllTask } from "../../store/features/TaskReducer";
+import { useNavigate } from "react-router-dom";
 
 // import dotenv from 'dotenv';
 
@@ -11,11 +12,10 @@ import { addTask, getAllTask } from '../../store/features/TaskReducer';
 // const base_uri = process.env.BASE_URI;
 
 const TaskListing = () => {
-
   const dispatch = useDispatch();
   const allTasks = useSelector((state) => state?.tasks);
   console.log(allTasks);
-  
+  const navigate = useNavigate()
 
   const getAllTasks = async () => {
     try {
@@ -32,29 +32,35 @@ const TaskListing = () => {
 
   useEffect(() => {
     getAllTasks();
-  }, [])
+  }, []);
 
-  return <div>
+  return (
     <div>
-      {allTasks?.task?.length === 0 ? 'Np tasks found!': 
-      <table>
-        <tr>
-          <th>Title</th>
-          <th>Discription</th>
-          <th>Due Date</th>
-        </tr>
-        {allTasks?.task.map((item) => {
-          return (
+      <button onClick={() => navigate('/add')}>Add task +</button>
+      <div>
+        {allTasks?.task?.length === 0 ? (
+          "No tasks found!"
+        ) : (
+          <table>
             <tr>
-              <td>{item?.title}</td>
-              <td>{item?.discription}</td>
-              <td>{item?.due_date}</td>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Due Date</th>
             </tr>
-          )
-        })}
-        </table>}
+            {allTasks?.task.map((item) => {
+              return (
+                <tr>
+                  <td>{item?.title}</td>
+                  <td>{item?.description}</td>
+                  <td>{item?.due_date}</td>
+                </tr>
+              );
+            })}
+          </table>
+        )}
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default TaskListing;
