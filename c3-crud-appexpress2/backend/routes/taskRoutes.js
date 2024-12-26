@@ -22,8 +22,8 @@ taskRoutes.post("/add", async (req, res) => {
 
     const response = await Tasks.create(data);
     res
-      .status(200)
-      .send({ status: 200, message: enums.SUCCESS_MSG, data: response });
+      .status(201)
+      .send({ status: 201, message: enums.SUCCESS_MSG, data: response });
   } catch (error) {
     res.status(400).send({ status: 400, message: enums.ERROR_MSG });
   }

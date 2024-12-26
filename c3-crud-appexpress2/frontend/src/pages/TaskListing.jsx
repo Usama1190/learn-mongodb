@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getReq } from "../api/axios";
+import { deleteReq, getReq } from "../api/axios";
 // import cors from "cors"; // Remove this
 import { useDispatch, useSelector } from "react-redux";
 import { addTask, getAllTask } from "../../store/features/TaskReducer";
@@ -15,7 +15,7 @@ const TaskListing = () => {
   const dispatch = useDispatch();
   const allTasks = useSelector((state) => state?.tasks);
   console.log(allTasks);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getAllTasks = async () => {
     try {
@@ -30,22 +30,29 @@ const TaskListing = () => {
     }
   };
 
+  const deleteTask = async (id) => {
+    const response = await deleteReq(`/tasks/delete/:${id}`)
+    console.log(response);
+    
+  }
+
   useEffect(() => {
     getAllTasks();
   }, []);
 
   return (
     <div>
-      <button onClick={() => navigate('/add')}>Add task +</button>
       <div>
+        <button onClick={() => navigate("/add")}>Add task +</button>
         {allTasks?.task?.length === 0 ? (
-          "No tasks found!"
+          "No Tasks Found!"
         ) : (
           <table>
             <tr>
               <th>Title</th>
               <th>Description</th>
               <th>Due Date</th>
+              <th>Actions</th>
             </tr>
             {allTasks?.task.map((item) => {
               return (
@@ -53,6 +60,10 @@ const TaskListing = () => {
                   <td>{item?.title}</td>
                   <td>{item?.description}</td>
                   <td>{item?.due_date}</td>
+                  <td>
+                    <button>Edit</button>
+                    <button onClick={() => deleteTask(item?._id)}>Delete</button>
+                  </td>
                 </tr>
               );
             })}
