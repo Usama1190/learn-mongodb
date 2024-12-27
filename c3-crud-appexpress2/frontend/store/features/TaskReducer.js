@@ -15,7 +15,7 @@ const TaskReducer = createSlice({
             state.task.push(payload)
         },
         deleteTask: (state, {payload}) => {
-            state.task = state.task.filter(task => task.id !== payload);
+            state.task = state.task.filter((item) => item._id !== payload);
         }
     }
 })

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { deleteReq, getReq } from "../api/axios";
 // import cors from "cors"; // Remove this
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, getAllTask } from "../../store/features/TaskReducer";
+import { addTask, deleteTask, getAllTask } from "../../store/features/TaskReducer";
 import { useNavigate } from "react-router-dom";
 
 // import dotenv from 'dotenv';
@@ -30,9 +30,9 @@ const TaskListing = () => {
     }
   };
 
-  const deleteTask = async (id) => {
-    const response = await deleteReq(`/tasks/delete/:${id}`)
-    console.log(response);
+  const handledeleteTask = async (id) => {
+    const response = await deleteReq(`/tasks/delete/${id}`)
+    dispatch(deleteTask(id));
     
   }
 
@@ -62,7 +62,7 @@ const TaskListing = () => {
                   <td>{item?.due_date}</td>
                   <td>
                     <button>Edit</button>
-                    <button onClick={() => deleteTask(item?._id)}>Delete</button>
+                    <button onClick={() => handledeleteTask(item?._id)}>Delete</button>
                   </td>
                 </tr>
               );
